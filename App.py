@@ -1,5 +1,6 @@
 import sys
 import os
+from turtle import update
 
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
@@ -23,28 +24,30 @@ class App(QMainWindow):
         title = "NI6212 Interface"
         width = 855
         height = 500
-        
-        self.setWindowTitle(title)
-        self.setFixedSize(width,height)
-        
+                
         model = Model()
         view = View(model)
         controller = Controller(model,view)
         
-        ai_plot_data_connector = DataConnector(view.getPlotAI(), max_points=500)
-        ao_plot_data_connector = DataConnector(view.getPlotAO(), max_points=500)
-        Thread(target=controller.scan_amplitude.scan).start()
-        Thread(target=controller.aiPlotGenerator, args=(ai_plot_data_connector,)).start()
-        Thread(target=controller.aoPlotGenerator, args=(ao_plot_data_connector,)).start()
-        Thread(target=controller.doController).start()
+        Thread(target=self.task, args=(view,controller)).start()
         
+        self.setWindowTitle(title)
+        self.setFixedSize(width,height)
         self.setCentralWidget(view)
         self.show()
     
-    def exec_(self):
-        return 0
     
+    def task(self, view: View, controller: Controller):
+        ai_plot_data_connector = DataConnector(view.getPlotAI(), max_points=300, update_rate=100)
+        ao_plot_data_connector = DataConnector(view.getPlotAO(), max_points=300, update_rate=100)
+        
+        while True:
+            Thread(target=controller.executeScan()).start()
+            Thread(target=controller.aiPlotGenerator,args=(ai_plot_data_connector,)).start()
+            Thread(target=controller.aoPlotGenerator,args=(ao_plot_data_connector,)).start()
+            # Thread(target=controller.doController).start()
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     ex = App()
-    os._exit(ex.exec_() + app.exec_())
+    os._exit(app.exec_())
