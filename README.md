@@ -79,6 +79,8 @@ When 'DO1' or 'DO2' is selected, one port set in 'Port Setting' is used.
 Selecting 'Both' allows the use of two digital output ports.
 
 If something goes wrong, you can restore the initial state by clicking the 'initialize' button at the bottom of the screen.
+(Port settings and parameter settings are maintained.)
+Pressing the initialize button during scanning operation will stop the operation.
 
 If you want to change the initial values when the application starts, you can do so in 'src/Model.py'.
 
