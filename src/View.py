@@ -345,23 +345,59 @@ class View(QWidget):
     def setScanButtonState(self, state: bool) -> None:
         self.__scan_button.setChecked(state)
     
+    def setConditioningEnabled(self, state: bool) -> None:
+        self.__conditioning_checkbox.setEnabled(state)
+    
     def setConditioningChecked(self, checked: bool) -> None:
         self.__conditioning_checkbox.setChecked(checked)
+
+    def setAIChannelComboEnabled(self, state: bool) -> None:
+        self.__ai_channel_combo.setEnabled(state)
+        
+    def setAOChannelComboEnabled(self, state: bool) -> None:
+        self.__ao_channel_combo.setEnabled(state)
+    
+    def setDO1PortComboEnabled(self, state: bool) -> None:
+        self.__do1_port_combo.setEnabled(state)
     
     def setDO1PortComboCurrentIndex(self, index: int) -> None:
         self.__do1_port_combo.setCurrentIndex(index)
     
+    def setDO1LineComboEnabled(self, state: bool) -> None:
+        self.__do1_line_combo.setEnabled(state)
+    
     def setDO1LineComboCurrentIndex(self, index: int) -> None:
         self.__do1_line_combo.setCurrentIndex(index)
-        
+    
+    def setDO2PortComboEnabled(self, state: bool) -> None:
+        self.__do2_port_combo.setEnabled(state)
+    
     def setDO2PortComboCurrentIndex(self, index: int) -> None:
         self.__do2_port_combo.setCurrentIndex(index)
+    
+    def setDO2LineComboEnabled(self, state: bool) -> None:
+        self.__do2_line_combo.setEnabled(state)
     
     def setDO2LineComboCurrentIndex(self, index: int) -> None:
         self.__do2_line_combo.setCurrentIndex(index)
     
     def setLampState(self, state: bool) -> None:
         self.__lamp.setChecked(state)
+    
+    def setThresholdTextBoxEnabled(self, state: bool) -> None:
+        self.__threshold.setEnabled(state)
+        
+    def setVmaxTextBoxEnabled(self, state: bool) -> None:
+        self.__vmax.setEnabled(state)
+    
+    def setVminTextBoxEnabled(self, state: bool) -> None:
+        self.__vmin.setEnabled(state)
+        
+    def setVincTextBoxEnabled(self, state: bool) -> None:
+        self.__vinc.setEnabled(state)
+        
+    def setDOConditioningComboEnabled(self, state: bool) -> None:
+        self.__do_conditioning_combo.setEnabled(state)
     
     def setPlotState(self, state: bool) -> None:
         self.__plot_state = state

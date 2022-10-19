@@ -102,6 +102,24 @@ class Controller(object):
         
         self.__seveUserSelectInformation()
     
+    def __setConditioningCheckBoxEnabled(self, state: bool) -> None:
+        self.__view.setConditioningEnabled(state)
+    
+    def __setPortSettingComboEnabled(self, state: bool) -> None:
+        self.__view.setAIChannelComboEnabled(state)
+        self.__view.setAOChannelComboEnabled(state)
+        self.__view.setDO1PortComboEnabled(state)
+        self.__view.setDO1LineComboEnabled(state)
+        self.__view.setDO2PortComboEnabled(state)
+        self.__view.setDO2LineComboEnabled(state)
+    
+    def __setParameterSettingTextBoxEnabled(self, state: bool) -> None:
+        self.__view.setThresholdTextBoxEnabled(state)
+        self.__view.setVmaxTextBoxEnabled(state)
+        self.__view.setVminTextBoxEnabled(state)
+        self.__view.setVincTextBoxEnabled(state)
+        self.__view.setDOConditioningComboEnabled(state)
+    
     def slotScanButtonToggled(self, checked: bool) -> None:
         if checked:            
             self.__scan_amplitude.initFlag()
@@ -121,18 +139,31 @@ class Controller(object):
             self.__view.setDO1Checked(False)
             self.__view.setDO2Checked(False)
             self.__view.setLampState(False)
+            
+            self.__setConditioningCheckBoxEnabled(False)
+            self.__setPortSettingComboEnabled(False)
+            self.__setParameterSettingTextBoxEnabled(False)
+            
             self.__view.setScanBottonText(self.__model.getScanButtonLabel(True))
         else:
             self.__plot_state = False
             self.__scan_amplitude.setParameters(self.__plot_state,0.0,0.0,0.0,0.0,[False,False])
+            
+            self.__setConditioningCheckBoxEnabled(True)
+            self.__setPortSettingComboEnabled(True)
+            self.__setParameterSettingTextBoxEnabled(True)
+            
             self.__view.setScanBottonText(self.__model.getScanButtonLabel(False))
             
     def initButtonClecked(self) -> None:
         self.__view.setDO1Checked(False)
         self.__view.setDO2Checked(False)
-        self.__view.setConditioningChecked(False)
         self.__view.setLampState(False)
         self.__view.setScanButtonState(False)
+        
+        self.__setConditioningCheckBoxEnabled(True)
+        self.__setPortSettingComboEnabled(True)
+        self.__setParameterSettingTextBoxEnabled(True)
         
         self.__view.initDO1LineCombo()
         self.__view.initDO2LineCombo()
