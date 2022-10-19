@@ -3,10 +3,9 @@ import time
 
 from NIDAQmxController import NIDAQ_ai_task
 from NIDAQmxController import NIDAQ_ao_task
-from NIDAQmxController import NIDAQ_do_task
 
 class ScanAmplitude(object):
-    def __init__(self, ai_task: NIDAQ_ai_task, ao_task):
+    def __init__(self, ai_task: NIDAQ_ai_task, ao_task: NIDAQ_ao_task):
         self.__ai_task = ai_task
         self.__ao_task = ao_task
     

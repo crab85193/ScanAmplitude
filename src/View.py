@@ -1,10 +1,8 @@
 from PyQt5.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QLineEdit,QComboBox,QCheckBox,QLabel
-
 import pyqtgraph as pg
 from pglive.kwargs import Crosshair
 from pglive.sources.live_plot import LiveLinePlot
 from pglive.sources.live_plot_widget import LivePlotWidget
-
 import Model
 import Controller
 

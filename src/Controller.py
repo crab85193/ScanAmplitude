@@ -1,12 +1,9 @@
 import time
-
-from NIDAQmxController import NIDAQ_ai_task,NIDAQ_ao_task,NIDAQ_do_task
-
-from ScanAmplitude import ScanAmplitude
-from DOManualController import DOManualController
-
 import Model
 import View
+from NIDAQmxController import NIDAQ_ai_task,NIDAQ_ao_task,NIDAQ_do_task
+from ScanAmplitude import ScanAmplitude
+from DOManualController import DOManualController
 
 class Controller(object):
     def __init__(self, model: Model, view: View):

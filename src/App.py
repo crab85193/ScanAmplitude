@@ -1,16 +1,11 @@
 import sys
 import os
-from turtle import update
-
+from threading import Thread
 from PyQt5.QtWidgets import QMainWindow, QApplication
-
+from pglive.sources.data_connector import DataConnector
 from Model import Model
 from View import View
 from Controller import Controller
-
-from threading import Thread
-
-from pglive.sources.data_connector import DataConnector
 
 class App(QMainWindow):
     """
