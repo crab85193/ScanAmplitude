@@ -109,22 +109,22 @@ class View(QWidget):
         ### Set Fixed Height
         line.setFixedHeight(10)
         ## Port Select Combo
-        self.__ai_channels_combo = QComboBox()
-        self.__ao_channels_combo = QComboBox()
+        self.__ai_channel_combo = QComboBox()
+        self.__ao_channel_combo = QComboBox()
         self.__do1_port_combo = QComboBox()
         self.__do1_line_combo = QComboBox()
         self.__do2_port_combo = QComboBox()
         self.__do2_line_combo = QComboBox()
         ### Add Items
-        self.__ai_channels_combo.addItems(self.__model.getAIChannels())
-        self.__ao_channels_combo.addItems(self.__model.getAOChannels())
+        self.__ai_channel_combo.addItems(self.__model.getAIChannels())
+        self.__ao_channel_combo.addItems(self.__model.getAOChannels())
         self.__do1_port_combo.addItems(self.__model.getDOPorts())
         self.__do1_line_combo.addItems(self.__model.getDOLines())
         self.__do2_port_combo.addItems(self.__model.getDOPorts())
         self.__do2_line_combo.addItems(self.__model.getDOLines())
         ### Set Default Index
-        self.__ai_channels_combo.setCurrentIndex(self.__model.getAIChannelsDefaultIndex())
-        self.__ao_channels_combo.setCurrentIndex(self.__model.getAOChannelsDefaultIndex())
+        self.__ai_channel_combo.setCurrentIndex(self.__model.getAIChannelsDefaultIndex())
+        self.__ao_channel_combo.setCurrentIndex(self.__model.getAOChannelsDefaultIndex())
         self.__do1_port_combo.setCurrentIndex(self.__model.getDO1PortsDefaultIndex())
         self.__do1_line_combo.setCurrentIndex(self.__model.getDO1LinesDefaultIndex())
         self.__do2_port_combo.setCurrentIndex(self.__model.getDO2PortsDefaultIndex())
@@ -137,9 +137,9 @@ class View(QWidget):
         do2_setting_area = QHBoxLayout()
         ### AddWidget
         ai_setting_area.addWidget(ai_channel_label)
-        ai_setting_area.addWidget(self.__ai_channels_combo)
+        ai_setting_area.addWidget(self.__ai_channel_combo)
         ao_setting_area.addWidget(ao_channel_label)
-        ao_setting_area.addWidget(self.__ao_channels_combo)
+        ao_setting_area.addWidget(self.__ao_channel_combo)
         do1_setting_area.addWidget(do1_port_and_line_label)
         do1_setting_area.addWidget(self.__do1_port_combo)
         do1_setting_area.addWidget(self.__do1_line_combo)
@@ -246,22 +246,52 @@ class View(QWidget):
         return self.__conditioning_checkbox.isChecked()
     
     def getAIChannel(self) -> str:
-        return self.__ai_channels_combo.currentText()
+        return self.__ai_channel_combo.currentText()
+    
+    def getAIChannelComboCurrentIndex(self) -> int:
+        return self.__ai_channel_combo.currentIndex()
     
     def getAOChannel(self) -> str:
-        return self.__ao_channels_combo.currentText()
+        return self.__ao_channel_combo.currentText()
+    
+    def getAOChannelComboCurrentIndex(self) -> int:
+        return self.__ao_channel_combo.currentIndex()
     
     def getDO1Port(self) -> str:
         return self.__do1_port_combo.currentText()
     
+    def getDO1PortComboIndex(self) -> int:
+        return self.__do1_port_combo.currentIndex()
+    
+    def getDO1PortComboFindText(self, text: str) -> int:
+        return self.__do1_port_combo.findText(text)
+    
     def getDO1Line(self) -> str:
         return self.__do1_line_combo.currentText()
+    
+    def getDO1LineComboIndex(self) -> int:
+        return self.__do1_line_combo.currentIndex()
+    
+    def getDO1LineComboFindText(self, text: str) -> int:
+        return self.__do1_line_combo.findText(text)
     
     def getDO2Port(self) -> str:
         return self.__do2_port_combo.currentText()
     
+    def getDO2PortComboIndex(self) -> int:
+        return self.__do2_port_combo.currentIndex()
+    
+    def getDO2PortComboFindText(self, text: str) -> int:
+        return self.__do2_port_combo.findText(text)
+    
     def getDO2Line(self) -> str:
         return self.__do2_line_combo.currentText()
+    
+    def getDO2LineComboIndex(self) -> int:
+        return self.__do2_line_combo.currentIndex()
+    
+    def getDO2LineComboFindText(self, text: str) -> int:
+        return self.__do2_line_combo.findText(text)
     
     def getThresholdText(self) -> str:
         return self.__threshold.text()
@@ -320,8 +350,48 @@ class View(QWidget):
     def setConditioningChecked(self, checked: bool) -> None:
         self.__conditioning_checkbox.setChecked(checked)
     
+    def setDO1PortComboCurrentIndex(self, index: int) -> None:
+        self.__do1_port_combo.setCurrentIndex(index)
+    
+    def setDO1LineComboCurrentIndex(self, index: int) -> None:
+        self.__do1_line_combo.setCurrentIndex(index)
+        
+    def setDO2PortComboCurrentIndex(self, index: int) -> None:
+        self.__do2_port_combo.setCurrentIndex(index)
+    
+    def setDO2LineComboCurrentIndex(self, index: int) -> None:
+        self.__do2_line_combo.setCurrentIndex(index)
+    
     def setLampState(self, state: bool) -> None:
         self.__lamp.setChecked(state)
     
     def setPlotState(self, state: bool) -> None:
         self.__plot_state = state
+    
+    def removeDO1PortComboItem(self, index: int) -> None:
+        self.__do1_port_combo.removeItem(index)
+    
+    def removeDO1LineComboItem(self, index: int) -> None:
+        self.__do1_line_combo.removeItem(index)
+        
+    def removeDO2PortComboItem(self, index: int) -> None:
+        self.__do2_port_combo.removeItem(index)
+        
+    def removeDO2LineComboItem(self, index: int) -> None:
+        self.__do2_line_combo.removeItem(index)
+        
+    def initDO1PortCombo(self) -> None:
+        self.__do1_port_combo.clear()
+        self.__do1_port_combo.addItems(self.__model.getDOPorts())
+    
+    def initDO1LineCombo(self) -> None:
+        self.__do1_line_combo.clear()
+        self.__do1_line_combo.addItems(self.__model.getDOLines())
+        
+    def initDO2PortCombo(self) -> None:
+        self.__do2_port_combo.clear()
+        self.__do2_port_combo.addItems(self.__model.getDOPorts())
+    
+    def initDO2LineCombo(self) -> None:
+        self.__do2_line_combo.clear()
+        self.__do2_line_combo.addItems(self.__model.getDOLines())

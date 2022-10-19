@@ -19,7 +19,7 @@ class Model(object):
         self.__threshold_default_value = '10.0'
         self.__vmax_default_value = '5.0'
         self.__vmin_default_value = '-5.0'
-        self.__vinc_default_value = '0.1'
+        self.__vinc_default_value = '0.01'
         self.__do_conditioning_label = 'DO when conditioning'
         self.__init_button_default_label = 'Initialize'
         self.__line = '----------------------------------------'

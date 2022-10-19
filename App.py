@@ -21,14 +21,19 @@ class App(QMainWindow):
         Constructor.
         """
         super().__init__()
-        title = "NI6212 Interface"
-        width = 855
-        height = 500
-                
+        
         model = Model()
         view = View(model)
         controller = Controller(model,view)
         
+        # Window Title
+        title = "NI6212 Scan Amplitude"
+        
+        # Windows Size
+        width = 855
+        height = 500
+        
+        # Main Thread
         Thread(target=self.task, args=(view,controller)).start()
         
         self.setWindowTitle(title)
@@ -38,14 +43,17 @@ class App(QMainWindow):
     
     
     def task(self, view: View, controller: Controller):
+        # Plot Data Connector
         ai_plot_data_connector = DataConnector(view.getPlotAI(), max_points=300, update_rate=100)
         ao_plot_data_connector = DataConnector(view.getPlotAO(), max_points=300, update_rate=100)
         
         while True:
+            # Scan Thread
             Thread(target=controller.executeScan()).start()
+            # AI Plot Thread
             Thread(target=controller.aiPlotGenerator,args=(ai_plot_data_connector,)).start()
+            # AO Plot Thread
             Thread(target=controller.aoPlotGenerator,args=(ao_plot_data_connector,)).start()
-            # Thread(target=controller.doController).start()
             
 if __name__ == "__main__":
     app = QApplication(sys.argv)

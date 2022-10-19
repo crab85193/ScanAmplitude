@@ -6,10 +6,9 @@ from NIDAQmxController import NIDAQ_ao_task
 from NIDAQmxController import NIDAQ_do_task
 
 class ScanAmplitude(object):
-    def __init__(self, ai_task: NIDAQ_ai_task, ao_task: NIDAQ_ao_task, do_tasks: list):
+    def __init__(self, ai_task: NIDAQ_ai_task, ao_task):
         self.__ai_task = ai_task
         self.__ao_task = ao_task
-        self.__do_tasks = do_tasks
     
         self.__ai_msg_box = queue.Queue(maxsize=500)
         self.__ao_msg_box = queue.Queue(maxsize=500)
@@ -31,12 +30,11 @@ class ScanAmplitude(object):
         self.__conditioning_state = False
                 
         self.__dt = 5
-        self.__old_state = False
         
         self.__initMessageBox()
     
     def initFlag(self):
-        self.flag = False
+        self.__flag = False
     
     def __initMessageBox(self):
         while not self.__ai_msg_box.empty():
@@ -99,25 +97,24 @@ class ScanAmplitude(object):
     def scan(self):
         vi = self.__ai_task.getAIData_single()[0]
         
-        if self.__old_state != self.__scan_state:
-            self.__slope = 1.0
-        
         if self.__scan_state:            
             self.__vo = self.__vo + self.__slope * self.__vinc
 
             if self.__isThreshold(self.__threshold,vi) and self.__conditioning_state and not self.__flag:
                 self.__flag = True
                 time.sleep(self.__dt/1000)
+                
                 for i in range(len(self.__do_port_use_state)):
-                    # self.do_task[i].setDOData(self.do_port_use_state[i])
                     self.__do_state[i] = self.__do_port_use_state[i]
+                
                 self.__slope = 0
-                print(self.__vo)
+            
             elif self.__isThreshold(self.__threshold,vi):
                 pass
             
             if self.__slope > 0 and self.__vinc > 0 and self.__vo >= self.__vmax or self.__vinc < 0 and self.__vo <= self.__vmin:
                 self.__slope = -1.0
+            
             elif self.__slope < 0 and self.__vinc > 0 and self.__vo <= self.__vmin or self.__vinc < 0 and self.__vo >= self.__vmax:
                 self.__slope = 1.0
         
@@ -125,5 +122,3 @@ class ScanAmplitude(object):
         
         self.__ai_msg_box.put(vi)
         self.__ao_msg_box.put(self.__vo)
-        
-        self.__old_state = self.__scan_state
