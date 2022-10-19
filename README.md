@@ -46,20 +46,20 @@ When the threshold is reached, the analog output is fixed and a digital output i
 If the operation is started without the 'Conditioning' checkbox checked, the analog output will be increased or decreased repeatedly until the 'STOP' button is pressed.
 If the threshold is reached during that time, a check will be placed in the checkbox next to the Threshold entry field.
 
-## Digital Output Manual Control
+### Digital Output Manual Control
 
 ![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/do_manual_control.PNG)
 
 The digital output can be manually controlled in the section of the image above.
 
-## Port Setting
+### Port Setting
 
 ![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/port_setting.PNG)
 
 In the image section above, you can set the analog input/output channels and the digital output ports and lines.
 The two digital output ports and lines cannot be set to be the same.
 
-## Parameter Setting
+### Parameter Setting
 
 ![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/parameter_setting.PNG)
 
