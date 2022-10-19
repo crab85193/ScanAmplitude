@@ -6,7 +6,7 @@
 ![pglive](https://img.shields.io/badge/pglive-v0.3.3-007396.svg?logo=python&style=popout)
 ![nidaqmx](https://img.shields.io/badge/nidaqmx-v0.6.3-44A833.svg?style=popout)
 
-![image](https://github.com/crab85193/ScanAmplitude/blob/develop/img/title.PNG)
+![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/title.PNG)
 
 This is a GUI application developed for NATIONAL INSTRUMENTS' NI USB-6212 BNC BUS-POWERED M SE.
 
@@ -48,20 +48,20 @@ If the threshold is reached during that time, a check will be placed in the chec
 
 ## Digital Output Manual Control
 
-![image](https://github.com/crab85193/ScanAmplitude/blob/develop/img/do_manual_control.PNG)
+![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/do_manual_control.PNG)
 
 The digital output can be manually controlled in the section of the image above.
 
 ## Port Setting
 
-![image](https://github.com/crab85193/ScanAmplitude/blob/develop/img/port_setting.PNG)
+![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/port_setting.PNG)
 
 In the image section above, you can set the analog input/output channels and the digital output ports and lines.
 The two digital output ports and lines cannot be set to be the same.
 
 ## Parameter Setting
 
-![image](https://github.com/crab85193/ScanAmplitude/blob/develop/img/parameter_setting.PNG)
+![image](https://github.com/crab85193/ScanAmplitude/blob/main/img/parameter_setting.PNG)
 
 In the part of the image above, you can set the parameters required for the scanning operation.
 
