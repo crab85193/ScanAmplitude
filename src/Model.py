@@ -116,7 +116,7 @@ class Model(object):
     def getDOLines(self) -> list:
         return self.__do_lines
     
-    def getDOConditioningItems(self) -> list():
+    def getDOConditioningItems(self) -> list:
         return self.__do_conditioning_items
     
     def getAIChannelsDefaultIndex(self) -> int:

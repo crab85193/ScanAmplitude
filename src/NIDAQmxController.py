@@ -53,7 +53,8 @@ class NIDAQ_ai_task(NIDAQ_task):
         try:
             return self._task.read(number_of_samples_per_channel=1)
         except nidaqmx.errors.DaqReadError:
-            print('error')
+            print('NIDAQ_ai_task: DaqReadError (getAIData_single)')
+            return [False]
         
     def getAIData_multi(self, num: int) -> list:
         """
@@ -65,7 +66,8 @@ class NIDAQ_ai_task(NIDAQ_task):
         try:
             return self._task.read(number_of_samples_per_channel=num)
         except nidaqmx.errors.DaqReadError:
-            return [False]
+            print('NIDAQ_ai_task: DaqReadError (getAIData_multi)')
+            return [False] * num
         
 
 class NIDAQ_ao_task(NIDAQ_task):
@@ -90,9 +92,9 @@ class NIDAQ_ao_task(NIDAQ_task):
 
         """
         try:
-            return self._task.write(data, auto_start=False)
+            self._task.write(data, auto_start=False)
         except nidaqmx.errors.DaqWriteError:
-            return False
+            print('NIDAQ_ao_task: DaqWriteError (setAOData)')
 
 
 class NIDAQ_do_task(NIDAQ_task):
@@ -105,7 +107,7 @@ class NIDAQ_do_task(NIDAQ_task):
         super().__init__()
         super().createTask()
     
-    def createTask(self, port: str, line: str):
+    def createTask(self, port: str, line: str) -> None:
         super().stop()
         super().close()
         super().createTask()
@@ -117,6 +119,6 @@ class NIDAQ_do_task(NIDAQ_task):
 
         """
         try:
-            return self._task.write(data, auto_start=False)
+            self._task.write(data, auto_start=False)
         except nidaqmx.errors.DaqWriteError:
-            return False
+            print('NIDAQ_do_task: DaqWriteError (setDOData)')
