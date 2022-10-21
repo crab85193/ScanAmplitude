@@ -37,7 +37,7 @@ class App(QMainWindow):
         self.show()
     
     
-    def task(self, view: View, controller: Controller):
+    def task(self, view: View, controller: Controller) -> None:
         # Plot Data Connector
         ai_plot_data_connector = DataConnector(view.getPlotAI(), max_points=300, update_rate=100)
         ao_plot_data_connector = DataConnector(view.getPlotAO(), max_points=300, update_rate=100)

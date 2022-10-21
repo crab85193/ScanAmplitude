@@ -24,7 +24,7 @@ class Controller(object):
         self.__seveUserSelectInformation()
         self.__initTask()
             
-    def __seveUserSelectInformation(self):
+    def __seveUserSelectInformation(self) -> None:
         self.__ai_old_channel_index = self.__view.getAIChannelComboCurrentIndex()
         self.__ao_old_channel_index = self.__view.getAOChannelComboCurrentIndex()
         self.__do1_old_port_index = self.__view.getDO1PortComboIndex()
@@ -32,7 +32,7 @@ class Controller(object):
         self.__do2_old_port_index = self.__view.getDO2PortComboIndex()
         self.__do2_old_line_index = self.__view.getDO2LineComboIndex()
     
-    def __updateDOPortComboAndLineCombo(self):
+    def __updateDOPortComboAndLineCombo(self) -> None:
         do1_port = self.__view.getDO1Port()
         do1_line = self.__view.getDO1Line()
         do2_port = self.__view.getDO2Port()

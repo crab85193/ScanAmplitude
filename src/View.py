@@ -12,11 +12,11 @@ class View(QWidget):
         self.__model = model
         self.__plot_state = False
 
-    def register(self, controller: Controller):
+    def register(self, controller: Controller) -> None:
         self.__controller = controller
         self.__initUI()
         
-    def __initUI(self):
+    def __initUI(self) -> None:
         # Plot Widget
         kwargs = {Crosshair.ENABLED: True,Crosshair.LINE_PEN: pg.mkPen(color="red", width=1),Crosshair.TEXT_KWARGS: {"color": "green"}}
         self.__plot_ai = LiveLinePlot()
@@ -233,7 +233,23 @@ class View(QWidget):
         layout.addLayout(plot_group)
         layout.addLayout(user_interface)
         self.setLayout(layout)
+    
+    def initDO1PortCombo(self) -> None:
+        self.__do1_port_combo.clear()
+        self.__do1_port_combo.addItems(self.__model.getDOPorts())
+    
+    def initDO1LineCombo(self) -> None:
+        self.__do1_line_combo.clear()
+        self.__do1_line_combo.addItems(self.__model.getDOLines())
         
+    def initDO2PortCombo(self) -> None:
+        self.__do2_port_combo.clear()
+        self.__do2_port_combo.addItems(self.__model.getDOPorts())
+    
+    def initDO2LineCombo(self) -> None:
+        self.__do2_line_combo.clear()
+        self.__do2_line_combo.addItems(self.__model.getDOLines())
+    
     def isDO1Checked(self) -> bool:
         return self.__do1_checkbox.isChecked()
     
@@ -413,19 +429,3 @@ class View(QWidget):
         
     def removeDO2LineComboItem(self, index: int) -> None:
         self.__do2_line_combo.removeItem(index)
-        
-    def initDO1PortCombo(self) -> None:
-        self.__do1_port_combo.clear()
-        self.__do1_port_combo.addItems(self.__model.getDOPorts())
-    
-    def initDO1LineCombo(self) -> None:
-        self.__do1_line_combo.clear()
-        self.__do1_line_combo.addItems(self.__model.getDOLines())
-        
-    def initDO2PortCombo(self) -> None:
-        self.__do2_port_combo.clear()
-        self.__do2_port_combo.addItems(self.__model.getDOPorts())
-    
-    def initDO2LineCombo(self) -> None:
-        self.__do2_line_combo.clear()
-        self.__do2_line_combo.addItems(self.__model.getDOLines())
